@@ -1,0 +1,5 @@
+sanic
+transformers
+accelerate
+torch
+sentence_transformers
