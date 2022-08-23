@@ -20,6 +20,12 @@ def init():
 # Reference your preloaded global model variable here.
 def inference(model_inputs:dict) -> dict:
     global model
+    class NumpyEncoder(json.JSONEncoder):
+        def default(self, obj):
+            if isinstance(obj, np.ndarray):
+                return obj.tolist()
+            return json.JSONEncoder.default(self, obj)
+
     chunks = model_inputs.get('chunks', None)
     content_vector = np.array([chunk['text'] for chunk in chunks])
     
